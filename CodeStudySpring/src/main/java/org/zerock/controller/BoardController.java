@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.service.BoardService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Log4j
 @RequestMapping("/board/*")
 @Controller
+@AllArgsConstructor
 public class BoardController {
 	
 	private BoardService service;
@@ -26,6 +28,12 @@ public class BoardController {
 		
 		log.info("list");
 		model.addAttribute("list", service.getList());
+	}
+	
+	@GetMapping("/register")
+	public void register() {
+
+		
 	}
 	
 	@PostMapping("/register")
@@ -40,7 +48,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("bno") Long bno, Model model) {
 		
 		log.info("/get");
